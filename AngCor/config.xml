@@ -106,4 +106,5 @@
   <platform name="wp8">
     <splash src="res/screens/wp8/SplashScreenImage.png" width="768" height="1280" />
   </platform>
+  <plugin name="cordova-plugin-battery-status" version="1.1.2" />
 </widget>

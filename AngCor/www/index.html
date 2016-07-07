@@ -15,9 +15,11 @@
 </head>
 <body ng-controller="basicCtrl as ctr">
     <div class="app">
+        <div id="charging"><span  ng-if="ctr.isPluggedIn">&#9889;</span></div><div id="battery"><span ng-bind="ctr.batteryLevel"></span>%</div>
         <div class="logo"></div>
-        <div id="log" class="log">
-            <div ng-repeat="lg in ctr.log"><label ng-bind="lg"></label></div>
+        <div class="log">
+            <div ng-repeat="lg in ctr.log"><label ng-bind="lg"></label>
+            </div>
         </div>
 
     </div>
