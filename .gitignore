@@ -250,7 +250,4 @@ paket-files/
 # JetBrains Rider
 .idea/
 *.sln.iml
-
-#Restorable Plugins
 bower_components/
-plugins/
