@@ -1,9 +1,9 @@
 ﻿(function () {
     'use strict';
-    angular.module("angCor.controllers").controller('basicCtrl', ['$timeout','$rootScope','$cordovaBatteryStatus', basicCtrl]);
+    angular.module("angCor.controllers").controller('basicCtrl', ['$timeout', '$rootScope', '$cordovaBatteryStatus', '$cordovaToast', basicCtrl]);
 
 
-    function basicCtrl($timeout, $rootScope, $cordovaBatteryStatus) {
+    function basicCtrl($timeout, $rootScope, $cordovaBatteryStatus, $cordovaToast) {
         var that = this;
         that.log = [];
         that.beacons = {};
@@ -27,15 +27,15 @@
             document.addEventListener('pause', onPause, false);
             document.addEventListener('resume', onResume, false);
 
-$rootScope.$on('$cordovaBatteryStatus:status', function(scope,status) {
-        onBatteryStatusUpdate(status, '');
-});
-$rootScope.$on('$cordovaBatteryStatus:low', function (scope, status) {
-    onBatteryStatusUpdate(status, 'Low ');
-});
-$rootScope.$on('$cordovaBatteryStatus:critical', function (scope, status) {
-    onBatteryStatusUpdate(status, 'Critical ');
-});
+            $rootScope.$on('$cordovaBatteryStatus:status', function(scope,status) {
+                    onBatteryStatusUpdate(status, '');
+            });
+            $rootScope.$on('$cordovaBatteryStatus:low', function (scope, status) {
+                onBatteryStatusLow(status);
+            });
+            $rootScope.$on('$cordovaBatteryStatus:critical', function (scope, status) {
+                onBatteryStatusCritical(status);
+            });
 
         }, false);
 
@@ -52,7 +52,14 @@ $rootScope.$on('$cordovaBatteryStatus:critical', function (scope, status) {
             that.batteryLevel = result.level;       // (0 - 100)
             that.isPluggedIn = result.isPlugged;   // bool
         }
-
+        function onBatteryStatusLow(status) {
+            $cordovaToast.showShortTop('WARNING! Your battery level is Low.');
+            onBatteryStatusUpdate(status, 'Low ');
+        }
+        function onBatteryStatusCritical(status) {
+            $cordovaToast.showLongTop('WARNING! Your battery level is at critical levels. Plug in NOW!');
+            onBatteryStatusUpdate(status, 'Critical ');
+        }
     }
 
 })();

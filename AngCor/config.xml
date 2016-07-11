@@ -107,4 +107,5 @@
     <splash src="res/screens/wp8/SplashScreenImage.png" width="768" height="1280" />
   </platform>
   <plugin name="cordova-plugin-battery-status" version="1.1.2" />
+  <plugin name="cordova-plugin-x-toast" version="2.5.2" src="https://github.com/EddyVerbruggen/Toast-PhoneGap-Plugin.git" />
 </widget>
